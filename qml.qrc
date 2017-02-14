@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
-        <file>setup.qml</file>
+        <file>Main.qml</file>
+        <file>Setup.qml</file>
         <file>toSetup.js</file>
         <file>common.js</file>
     </qresource>

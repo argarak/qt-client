@@ -5,11 +5,11 @@ import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 import QtQuick.Controls.Universal 2.0
 import Material 0.3
-//import "setup.qml"
 import "toSetup.js" as Setup
 import "common.js" as Common
 
 ApplicationWindow {
+    id: rootWindow
     modality: Qt.ApplicationModal
     flags: Qt.SplashScreen
     property int timeoutInterval: 2000
@@ -20,7 +20,6 @@ ApplicationWindow {
     height: Common.windowHeight
     title: qsTr("mirpm client v0.1")
     color: Common.windowColor
-    id: rootWindow
 
     Column {
         Image {
@@ -53,10 +52,6 @@ ApplicationWindow {
         horizontalAlignment: Text.AlignRight
         width: rootWindow.width
         anchors.bottom: parent.bottom
-    }
-
-    Loader {
-        source: "setup.qml";
     }
 
     Timer {

@@ -5,3 +5,4 @@
 var windowWidth = 640;
 var windowHeight = 480;
 var windowColor = "#0e0e0e";
+var iconSize = 20;

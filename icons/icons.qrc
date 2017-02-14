@@ -1,0 +1,22 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+
+<qresource prefix="/icons/content">
+	<file alias="add.svg">content_add.svg</file>
+</qresource>
+
+<qresource prefix="/icons/action">
+	<file alias="settings.svg">action_settings.svg</file>
+	<file alias="build.svg">action_build.svg</file>
+	<file alias="code.svg">action_code.svg</file>
+	<file alias="done.svg">action_done.svg</file>
+	<file alias="get app.svg">action_get app.svg</file>
+	<file alias="delete.svg">action_delete.svg</file>
+</qresource>
+
+<qresource prefix="/icons/hardware">
+	<file alias="device hub.svg">hardware_device hub.svg</file>
+	<file alias="cast.svg">hardware_cast.svg</file>
+</qresource>
+
+</RCC>
