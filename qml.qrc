@@ -4,5 +4,6 @@
         <file>Setup.qml</file>
         <file>toSetup.js</file>
         <file>common.js</file>
+        <file>jsonData.js</file>
     </qresource>
 </RCC>

@@ -7,7 +7,8 @@ SOURCES += main.cpp
 
 RESOURCES += qml.qrc \
     assets.qrc \
-    icons/icons.qrc
+    icons/icons.qrc \
+    data/data.qrc
 
 OPTIONS += roboto
 
@@ -39,4 +40,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     README.md \
-    COPYING
+    COPYING \
+    data/labels.json \
+    data/nodes.json
+
+HEADERS += \
+    material/build/src/moc_predefs.h

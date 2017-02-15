@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/data">
+        <file>nodes.json</file>
+        <file>labels.json</file>
+    </qresource>
+</RCC>

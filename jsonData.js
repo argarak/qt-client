@@ -13,15 +13,13 @@
  * limitations under the License.
 */
 
-/*
- * Sets common global variables to be used throught QML files
- */
-
-var windowWidth = 640;
-var windowHeight = 480;
-var windowColor = "#0e0e0e";
-var iconSize = 20;
-var toolbarColor = "#111111";
-var sidebarColor = "#212121";
-var nodeJSON = "/data/nodes.json";
-var labelJSON = "/data/labels.json";
+function loadNodes(filepath, list) {
+    var xhr = new XMLHttpRequest;
+    xhr.open("GET", filepath);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            var out = JSON.parse(xhr.responseText);
+            console.log(out);
+        }
+    }
+}
