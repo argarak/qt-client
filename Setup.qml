@@ -82,27 +82,13 @@ Page {
                 width: parent.width
 
                 Repeater {
-                    model: ListModel {
-                        ListElement {
-                            name: "John Smith"
-                            number: "555 3264"
-                        }
-                        ListElement {
-                            name: "John Brown"
-                            number: "555 8426"
-                        }
-                        ListElement {
-                            name: "Sam Wise"
-                            number: "555 0473"
-                        }
-                    }
+                    model: nodeModel
 
                     delegate: ListItem.Standard {
-                        text: name
+                        text: Data.assignValue(nodeModel);
                         textColor: "#FFFFFF"
 
-                        //selected: modelData == selectedComponent
-                        //onClicked: selectedComponent = modelData
+                        onClicked: Data.onNodeClicked();
                     }
                 }
             }

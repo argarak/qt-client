@@ -13,13 +13,13 @@
  * limitations under the License.
 */
 
-function loadNodes(filepath, list) {
-    var xhr = new XMLHttpRequest;
-    xhr.open("GET", filepath);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == XMLHttpRequest.DONE) {
-            var out = JSON.parse(xhr.responseText);
-            console.log(out);
-        }
-    }
+var count = 0;
+
+function assignValue(nodeModel) {
+    count++;
+    return nodeModel[count - 1];
+}
+
+function onNodeClicked() {
+    console.log("node clicked!");
 }
