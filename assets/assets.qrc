@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/img">
         <file>mirpm.png</file>
+        <file>select_node.svg</file>
     </qresource>
 </RCC>

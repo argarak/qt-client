@@ -6,9 +6,9 @@ CONFIG += c++11
 SOURCES += main.cpp
 
 RESOURCES += qml.qrc \
-    assets.qrc \
     icons/icons.qrc \
-    data/data.qrc
+    data/data.qrc \
+    assets/assets.qrc
 
 OPTIONS += roboto
 

@@ -73,6 +73,7 @@ Page {
     }
 
     PageSidebar {
+        id: "leftSidebar"
         title: "Sidebar"
 
         sidebar: Sidebar {
@@ -98,5 +99,42 @@ Page {
         height: setupPage.height - toolbar.height
         anchors.bottom: setupPage.bottom
         anchors.top: toolbar.bottom
+    }
+
+    Rectangle {
+        id: rightPage
+        width: setupPage.width - leftSidebar.width
+        height: setupPage.height - toolbar.height
+        anchors.right: setupPage.right
+        anchors.bottom: setupPage.bottom
+        anchors.top: toolbar.bottom
+        anchors.left: leftSidebar.right
+        color: Common.windowColor
+
+        Item {
+            anchors.centerIn: parent
+            Image {
+                id: pic
+                source: "qrc:/img/select_node.svg"
+                anchors.horizontalCenter: parent.horizontalCenter
+                y: (rightPage.width / 2) - (pic.height / 2) - (picLabel.height / 2)
+                sourceSize.width: rightPage.width / (rootWindow.width / 400)
+                sourceSize.height: rightPage.width / (rootWindow.width / 400)
+            }
+            Text {
+                id: picLabel
+                width: rightPage.width
+                height: rightPage.height
+                horizontalAlignment: Text.AlignHCenter
+                anchors.horizontalCenter: pic.horizontalCenter
+                anchors.top: pic.bottom
+                anchors.topMargin: 5
+                text: "Select a node to see its properties!"
+                font.family: "Roboto"
+                font.pixelSize: 24
+                wrapMode: Text.WordWrap
+                color: "#FFFFFF"
+            }
+        }
     }
 }
