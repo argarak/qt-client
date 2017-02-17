@@ -1,3 +1,5 @@
+<img alt="qt-client logo" src="https://raw.githubusercontent.com/mirpm/qt-client/master/assets/qt-client.svg" width="200px"/>
+
 # qt-client
 
 mirpm's flagship qt client for controlling, creating and monitoring nodes.
