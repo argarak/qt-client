@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick
+QT += qml quick quickcontrols2
 CONFIG += c++11
 
 SOURCES += main.cpp
@@ -12,12 +12,10 @@ RESOURCES += qml.qrc \
 
 OPTIONS += roboto
 
-DEFINES += QPM_INIT\\(E\\)=\"E.addImportPath(QStringLiteral(\\\"qrc:/\\\"));\"
-
-include(material/material.pri)
+include(./fluid/fluid.pri)
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH = ./material/
+QML_IMPORT_PATH =
 
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =
@@ -43,6 +41,3 @@ DISTFILES += \
     COPYING \
     data/labels.json \
     data/nodes.json
-
-HEADERS += \
-    material/build/src/moc_predefs.h

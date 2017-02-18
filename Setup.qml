@@ -13,14 +13,15 @@
  * limitations under the License.
 */
 
-import QtQuick 2.0
+import QtQuick 2.4
 import QtQuick.Window 2.0
-import QtQuick.Layouts 1.1
+import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.1
 import QtQuick.Controls.Material 2.0
 import QtQuick.Controls.Universal 2.0
 import QtQuick.Controls.Styles 1.3
-import Material 0.2
+import Fluid.Controls 1.0
+import Fluid.Material 1.0
 import Material.ListItems 0.1 as ListItem
 import "toSetup.js" as Setup
 import "common.js" as Common
@@ -32,86 +33,75 @@ Page {
     visible: false
     width: Common.windowWidth
     height: Common.windowHeight
-    backgroundColor: Common.windowColor
 
-    ToolBar {
-        id: toolbar
-        width: setupPage.width
-        background: Rectangle {
-            color: Common.toolbarColor
+    property bool canGoBack: false
+
+    title: "Node Setup"
+    Material.background: Common.windowColor
+
+    actions: [
+        Action {
+            text: qsTr("Add")
+            tooltip: qsTr("Add a new node")
+            iconName: "content/add"
+            onTriggered: console.log("Display node wizard")
+        },
+        Action {
+            text: qsTr("Preferences")
+            iconName: "action/settings"
+            tooltip: qsTr("Change preferences")
+            onTriggered: console.log("Display preferences window")
         }
+    ]
 
-        RowLayout {
-            anchors.fill: parent
-            ToolButton {
-                Image {
-                    source: "qrc:/icons/content/add.svg"
-                    height: parent.height - 10
-                    width: parent.height - 10
-                    anchors.centerIn: parent
-                }
-                Text {
-                    text: "Create new node"
-
-                    anchors.left: parent.right
-                    anchors.verticalCenter: parent.verticalCenter
-                    color: "#FFFFFF"
-                    font.family: "Roboto"
-                    font.pixelSize: 12
-                }
-            }
-            Item { Layout.fillWidth: true }
-            ToolButton {
-                Image {
-                    source: "qrc:/icons/action/settings.svg"
-                    height: parent.height - 10
-                    width: parent.height - 10
-                    anchors.centerIn: parent
-                }
-            }
-        }
-    }
-
-    PageSidebar {
+    Pane {
         id: leftSidebar
-        title: "Sidebar"
-
-        sidebar: Sidebar {
-            backgroundColor: Common.sidebarColor
-
-            Column {
-                width: parent.width
-
-                Repeater {
-                    model: nodeModel
-
-                    delegate: ListItem.Standard {
-                        text: Data.assignValue(nodeModel);
-                        textColor: "#FFFFFF"
-
-                        onClicked: Data.onNodeClicked();
-                    }
-                }
-            }
+        anchors {
+            left: parent.left
+            top: parent.top
+            bottom: parent.bottom
         }
+        width: 200
+        padding: 0
+        z: 2
 
-        width: dp(240)
-        height: setupPage.height - toolbar.height
-        anchors.bottom: setupPage.bottom
-        anchors.top: toolbar.bottom
+        Material.background: Common.sidebarColor
+        Material.elevation: 1
+
+        Universal.background: Universal.accent
+
+        ListView {
+            id: listView
+            anchors.fill: parent
+            currentIndex: 0
+
+            model: nodeModel
+
+            header: Subheader {
+                text: qsTr("Nodes")
+                textColor: "#888888"
+            }
+            delegate: ListItem.Standard {
+                text: Data.assignValue(nodeModel);
+                textColor: "#FFFFFF"
+
+                onClicked: Data.onNodeClicked(setupStack, index);
+            }
+
+            ScrollBar.vertical: ScrollBar {}
+        }
     }
-
     StackView {
         id: setupStack
         width: setupPage.width - leftSidebar.width
-        height: setupPage.height - toolbar.height
+        height: setupPage.height - appBar.height
         anchors.right: parent.right
         anchors.bottom: parent.bottom
 
         initialItem: Rectangle {
             id: rightPage
             width: setupPage.width - leftSidebar.width
-            height: setupPage.height - toolbar.height
+            height: setupPage.height - appBar.height
             anchors.centerIn: parent
             color: Common.windowColor
 
@@ -121,9 +111,9 @@ Page {
                     id: pic
                     source: "qrc:/img/select_node.svg"
                     anchors.horizontalCenter: parent.horizontalCenter
-                    y: (setupStack.height / 2) - (pic.height / 2) - (picLabel.height / 2) - 30
-                    sourceSize.width: rightPage.width / (rootWindow.width / 400)
-                    sourceSize.height: rightPage.width / (rootWindow.width / 400)
+                    y: ((setupStack.height / 2) - (pic.height / 2) - (picLabel.height / 2) - 30)
+                    sourceSize.width: rightPage.width / (rootWindow.width / 300)
+                    sourceSize.height: rightPage.width / (rootWindow.width / 300)
                 }
                 Text {
                     id: picLabel
@@ -135,7 +125,7 @@ Page {
                     anchors.topMargin: 5
                     text: "Select a node to see its properties!"
                     font.family: "Roboto"
-                    font.pixelSize: 24
+                    font.pixelSize: 18
                     wrapMode: Text.WordWrap
                     color: "#FFFFFF"
                 }
@@ -143,3 +133,4 @@ Page {
         }
     }
 }
+

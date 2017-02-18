@@ -11,20 +11,23 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+*/
 
-.pragma library
+import QtQuick 2.4
+import QtQuick.Window 2.0
+import QtQuick.Layouts 1.1
+import QtQuick.Controls 2.0
+import QtQuick.Controls.Material 2.0
+import Fluid.Controls 1.0
+import Fluid.Material 1.0
+import "common.js" as Common
+import "jsonData.js" as Data
 
-var count = 0;
-var currentIndex = 0;
+Page {
+    Material.background: Common.windowColor
 
-function assignValue(nodeModel) {
-    count++;
-    return nodeModel[count - 1].label;
-}
-
-function onNodeClicked(stack, index) {
-    //console.log("node " + index + " clicked!");
-    currentIndex = index;
-    stack.push(Qt.resolvedUrl("NodeProperties.qml"));
+    Text {
+        text: "I am index " + Data.currentIndex + "!"
+        color: "#FFFFFF"
+    }
 }

@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQuickStyle>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
@@ -7,6 +8,8 @@
 #include <QFile>
 #include <QQuickView>
 #include <QQmlContext>
+#include "iconsimageprovider.h"
+#include "iconthemeimageprovider.h"
 
 // TODO create common vars in cpp instead of js
 
@@ -43,15 +46,23 @@ QVariantList createNodeModel(void) {
 
 int main(int argc, char *argv[])
 {
+    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
 
+    if(QQuickStyle::name().isEmpty())
+        QQuickStyle::setStyle("Material");
+
+    engine.addImportPath(QStringLiteral("qrc:/"));
+
+    engine.addImageProvider(QLatin1String("fluidicons"), new IconsImageProvider());
+    engine.addImageProvider(QLatin1String("fluidicontheme"), new IconThemeImageProvider());
+
     QQmlContext *ctxt = engine.rootContext();
     ctxt->setContextProperty("nodeModel", createNodeModel());
 
-    QPM_INIT(engine)
-            engine.load(QUrl(QStringLiteral("qrc:/Main.qml")));
+    engine.load(QUrl(QStringLiteral("qrc:/Main.qml")));
 
     return app.exec();
 }
