@@ -17,7 +17,7 @@ var count = 0;
 
 function assignValue(nodeModel) {
     count++;
-    return nodeModel[count - 1];
+    return nodeModel[count - 1].label;
 }
 
 function onNodeClicked() {

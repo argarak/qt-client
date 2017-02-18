@@ -14,8 +14,8 @@
  * Creates Node model to be used in Setup view, loads data
  * from node.json
  */
-QStringList createNodeModel(void) {
-    QStringList dataList;
+QVariantList createNodeModel(void) {
+    QVariantList dataList;
 
     QFile loadFile(":/data/nodes.json");
 
@@ -34,8 +34,9 @@ QStringList createNodeModel(void) {
 
     QJsonArray nodesArray = objDoc["nodes"].toArray();
 
-    for(int i = 0; i < nodesArray.count(); i++)
-        dataList.append(nodesArray[i].toString());
+    for(int i = 0; i < nodesArray.count(); i++) {
+        dataList.append(nodesArray[i].toVariant());
+    }
 
     return dataList;
 }

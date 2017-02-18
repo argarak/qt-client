@@ -1,20 +1,51 @@
 {
     "nodes": [
-        "testNode",
-        "otherTestNode",
-        "moreTestNodes",
-        "thereIsNode",
-        "testing",
-        "the",
-        "scrolling",
-        "capability",
-        "of",
-        "the",
-        "sidebar",
-        "to",
-        "see",
-        "if",
-        "it",
-        "works"
+        {
+            "label": "hello",
+            "lastOnline": "2 weeks ago",
+
+            "firmware": {
+                "version": 0.1,
+                "type": "avr"
+            },
+
+            "modules": ["miscr"]
+        },
+
+        {
+            "label": "testNode",
+            "lastOnline": "2 weeks ago",
+
+            "firmware": {
+                "version": 0.1,
+                "type": "avr"
+            },
+
+            "modules": ["miscr"]
+        },
+
+        {
+            "label": "world",
+            "lastOnline": "2 weeks ago",
+
+            "firmware": {
+                "version": 0.1,
+                "type": "avr"
+            },
+
+            "modules": ["miscr"]
+        },
+
+        {
+            "label": "moreText",
+            "lastOnline": "2 weeks ago",
+
+            "firmware": {
+                "version": 0.1,
+                "type": "avr"
+            },
+
+            "modules": ["miscr"]
+        }
     ]
 }

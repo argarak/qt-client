@@ -2,5 +2,6 @@
     <qresource prefix="/img">
         <file>mirpm.png</file>
         <file>select_node.svg</file>
+        <file>qt-client.svg</file>
     </qresource>
 </RCC>
