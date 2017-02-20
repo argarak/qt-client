@@ -1,3 +1,6 @@
 [submodule "fluid"]
 	path = fluid
 	url = https://github.com/lirios/fluid.git
+[submodule "mirp-cli"]
+	path = mirp-cli
+	url = https://github.com/mirpm/mirp-cli.git

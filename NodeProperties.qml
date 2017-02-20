@@ -26,8 +26,32 @@ import "jsonData.js" as Data
 Page {
     Material.background: Common.windowColor
 
-    Text {
-        text: "I am index " + Data.currentIndex + "!"
-        color: "#FFFFFF"
+    function getValueText(model) {
+        if(model.subField !== "") {
+            console.log(nodeModel[Data.currentIndex][model.field]);
+            return nodeModel[Data.currentIndex][model.field]
+        }
+        console.log(nodeModel[Data.currentIndex][model.field][model.subField]);
+        return nodeModel[Data.currentIndex][model.field][model.subField]
+    }
+
+    ListView {
+        anchors.fill: parent
+        model: ListModel {
+            ListElement { title: "Last Online"; field: "lastOnline"; subField: "" }
+            ListElement { title: "Firmware Version"; field: "firmware"; subField: "version" }
+            ListElement { title: "Firmware Type"; field: "firmware"; subField: "type" }
+            ListElement { title: "ROM Left"; field: "romLeft"; subField: "" }
+        }
+        header: Subheader {
+            text: "Details"
+        }
+        delegate: ListItem {
+            text: model.title
+
+            valueText: getValueText(model);
+        }
+
+        ScrollIndicator.vertical: ScrollIndicator {}
     }
 }

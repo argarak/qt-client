@@ -10,8 +10,34 @@
 #include <QQmlContext>
 #include "iconsimageprovider.h"
 #include "iconthemeimageprovider.h"
+#include <QDir>
+#include <QProcess>
 
 // TODO create common vars in cpp instead of js
+
+// TODO Add this variable to common vars
+QString configDir = QDir::homePath() + "/.mirp";
+
+/*
+ * Checks if the config directory (and its files) exist
+ */
+bool checkConfigExistance() {
+    // Again, re-write this with global vars!
+    if(QDir(configDir).exists() &&
+       QFile::exists(configDir + "/nodes.json") &&
+       QFile::exists(configDir + "/config.json"))
+        return true;
+    return false;
+}
+
+/*
+ * Creates blank configuration setup via mirp_cli
+ */
+void createBlankConfig() {
+    QProcess process;
+    process.start("python ../qt-client/mirp-cli/mirp_cli config create");
+    process.waitForFinished(-1);
+}
 
 /*
  * Creates Node model to be used in Setup view, loads data
@@ -46,6 +72,9 @@ QVariantList createNodeModel(void) {
 
 int main(int argc, char *argv[])
 {
+    if(!checkConfigExistance())
+        createBlankConfig();
+
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
 
