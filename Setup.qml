@@ -45,7 +45,7 @@ Page {
             text: qsTr("Add")
             tooltip: qsTr("Add a new node")
             iconName: "content/add"
-            onTriggered: console.log("Display node wizard")
+            onTriggered: pageStack.push(Qt.resolvedUrl("NodeWizard.qml"));
         },
         Action {
             text: qsTr("Preferences")
@@ -116,7 +116,7 @@ Page {
                     sourceSize.width: rightPage.width / (rootWindow.width / 300)
                     sourceSize.height: rightPage.width / (rootWindow.width / 300)
                 }
-                Text {
+                Label {
                     id: picLabel
                     width: rightPage.width
                     height: rightPage.height
@@ -128,7 +128,6 @@ Page {
                     font.family: "Roboto"
                     font.pixelSize: 18
                     wrapMode: Text.WordWrap
-                    color: "#FFFFFF"
                 }
             }
         }

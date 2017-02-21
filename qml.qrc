@@ -6,5 +6,7 @@
         <file>common.js</file>
         <file>jsonData.js</file>
         <file>NodeProperties.qml</file>
+        <file>NodeWizard.qml</file>
+        <file>NodeWizardSetup.qml</file>
     </qresource>
 </RCC>

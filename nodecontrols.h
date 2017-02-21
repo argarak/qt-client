@@ -9,11 +9,14 @@
 #include <QFile>
 #include <QVariant>
 #include <QDebug>
+#include <QDir>
 
 class nodeControls : public QObject {
     Q_OBJECT
 public:
     explicit nodeControls(QObject *parent = 0);
+
+    QString configDir = QDir::homePath() + "/.mirp";
 
     /*
      * Creates Node model to be used in Setup view, loads data
@@ -22,7 +25,7 @@ public:
     QVariantList createNodeModel(void) {
         QVariantList dataList;
 
-        QFile loadFile(":/data/nodes.json");
+        QFile loadFile(configDir + "/nodes.json");
 
         if (!loadFile.open(QIODevice::ReadOnly)) {
             qWarning("Couldn't open node data file.");
@@ -47,7 +50,7 @@ public:
     }
 
     Q_INVOKABLE void remove(QString label) {
-        qDebug() << "Removing " << label << "!\n";
+        qDebug() << "Removing " << label << "!";
     }
 signals:
 

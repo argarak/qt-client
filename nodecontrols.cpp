@@ -1,5 +1,3 @@
 #include "nodecontrols.h"
 
-nodeControls::nodeControls(QObject *parent) : QObject(parent) {
-
-}
+nodeControls::nodeControls(QObject *parent) : QObject(parent) {}
