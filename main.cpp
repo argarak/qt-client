@@ -1,4 +1,5 @@
-#include <QGuiApplication>
+#include <QApplication>
+#include <QStyleHints>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
 #include <QJsonDocument>
@@ -70,13 +71,14 @@ QVariantList createNodeModel(void) {
     return dataList;
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     if(!checkConfigExistance())
         createBlankConfig();
 
-    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QGuiApplication app(argc, argv);
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QApplication app(argc, argv);
+
+    QApplication::styleHints()->setUseHoverEffects(true);
 
     QQmlApplicationEngine engine;
 

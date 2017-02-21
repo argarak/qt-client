@@ -22,6 +22,7 @@ import QtQuick.Controls.Universal 2.0
 import QtQuick.Controls.Styles 1.3
 import Fluid.Controls 1.0
 import Fluid.Material 1.0
+import Fluid.Core 1.0
 import Material.ListItems 0.1 as ListItem
 import "toSetup.js" as Setup
 import "common.js" as Common
@@ -95,8 +96,8 @@ Page {
         id: setupStack
         width: setupPage.width - leftSidebar.width
         height: setupPage.height - appBar.height
+
         anchors.right: parent.right
-        anchors.bottom: parent.bottom
 
         initialItem: Rectangle {
             id: rightPage

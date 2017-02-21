@@ -16,7 +16,7 @@
 import QtQuick 2.4
 import QtQuick.Window 2.0
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.1
 import QtQuick.Controls.Material 2.0
 import Fluid.Controls 1.0
 import Fluid.Material 1.0
@@ -33,23 +33,66 @@ Page {
         return nodeModel[Data.currentIndex][field][subField]
     }
 
-    ListView {
-        anchors.fill: parent
-        model: ListModel {
-            ListElement { title: "Last Online"; field: "lastOnline"; subField: "" }
-            ListElement { title: "Firmware Version"; field: "firmware"; subField: "version" }
-            ListElement { title: "Firmware Type"; field: "firmware"; subField: "type" }
-            ListElement { title: "ROM Left"; field: "romLeft"; subField: "" }
-        }
-        header: Subheader {
-            text: "Details"
-        }
-        delegate: ListItem {
-            text: model.title
+    Rectangle {
+        id: listRectangle
+        color: Common.windowColor
+        width: parent.width
+        height: 300
+        ListView {
+            id: nodePropertyList
+            anchors.fill: parent
+            model: ListModel {
+                ListElement { title: "Last Online"; field: "lastOnline"; subField: "" }
+                ListElement { title: "Firmware Version"; field: "firmware"; subField: "version" }
+                ListElement { title: "Firmware Type"; field: "firmware"; subField: "type" }
+                ListElement { title: "ROM Left"; field: "romLeft"; subField: "" }
+            }
+            header: Subheader {
+                text: "Details"
+            }
+            delegate: ListItem {
+                text: model.title
 
-            valueText: getValueText(model.field, model.subField);
-        }
+                valueText: getValueText(model.field, model.subField);
+            }
 
-        ScrollIndicator.vertical: ScrollIndicator {}
+            ScrollIndicator.vertical: ScrollIndicator {}
+        }
+    }
+
+    Row {
+        id: iconRow
+        anchors.bottom: parent.bottom
+        IconButton {
+            id: buildButton
+            iconName: "action/build"
+            flat: true
+
+            ToolTip.visible: hovered
+            ToolTip.text: qsTr("Add/Remove Modules")
+        }
+        IconButton {
+            iconName: "file/file_upload"
+            flat: true
+
+            ToolTip.visible: hovered
+            ToolTip.text: qsTr("Upload to Node")
+        }
+        IconButton {
+            iconName: "action/delete"
+            flat: true
+
+            ToolTip.visible: hovered
+            ToolTip.text: qsTr("Remove Node")
+        }
+    }
+
+
+    Icon {
+        name: "image/brightness_1"
+        anchors.verticalCenter: iconRow.verticalCenter
+        anchors.right: parent.right
+        anchors.rightMargin: 15
+        color: "#888888"
     }
 }

@@ -1,6 +1,8 @@
 TEMPLATE = app
 
-QT += qml quick quickcontrols2
+QT_QUICK_CONTROLS_HOVER_ENABLED = 1
+
+QT += qml quick quickcontrols2 widgets
 CONFIG += c++11
 
 SOURCES += main.cpp
