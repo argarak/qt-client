@@ -26,13 +26,11 @@ import "jsonData.js" as Data
 Page {
     Material.background: Common.windowColor
 
-    function getValueText(model) {
-        if(model.subField !== "") {
-            console.log(nodeModel[Data.currentIndex][model.field]);
-            return nodeModel[Data.currentIndex][model.field]
+    function getValueText(field, subField) {
+        if(subField === "") {
+            return nodeModel[Data.currentIndex][field]
         }
-        console.log(nodeModel[Data.currentIndex][model.field][model.subField]);
-        return nodeModel[Data.currentIndex][model.field][model.subField]
+        return nodeModel[Data.currentIndex][field][subField]
     }
 
     ListView {
@@ -49,7 +47,7 @@ Page {
         delegate: ListItem {
             text: model.title
 
-            valueText: getValueText(model);
+            valueText: getValueText(model.field, model.subField);
         }
 
         ScrollIndicator.vertical: ScrollIndicator {}

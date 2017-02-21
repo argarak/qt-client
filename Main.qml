@@ -31,6 +31,8 @@ FluidWindow {
     signal timeout
     visible: true
 
+    Material.theme: Material.Dark
+
     width: Common.windowWidth
     height: Common.windowHeight
 
