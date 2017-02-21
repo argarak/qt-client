@@ -1,11 +1,10 @@
 TEMPLATE = app
 
-QT_QUICK_CONTROLS_HOVER_ENABLED = 1
-
 QT += qml quick quickcontrols2 widgets
 CONFIG += c++11
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    nodecontrols.cpp
 
 RESOURCES += qml.qrc \
     icons/icons.qrc \
@@ -43,3 +42,6 @@ DISTFILES += \
     COPYING \
     data/labels.json \
     data/nodes.json
+
+HEADERS += \
+    nodecontrols.h

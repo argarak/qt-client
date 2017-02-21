@@ -9,12 +9,13 @@
 #include <QFile>
 #include <QQuickView>
 #include <QQmlContext>
-#include "iconsimageprovider.h"
-#include "iconthemeimageprovider.h"
 #include <QDir>
 #include <QProcess>
 
-// TODO create common vars in cpp instead of js
+#include "iconsimageprovider.h"
+#include "iconthemeimageprovider.h"
+
+#include "nodecontrols.h"
 
 // TODO Add this variable to common vars
 QString configDir = QDir::homePath() + "/.mirp";
@@ -25,8 +26,8 @@ QString configDir = QDir::homePath() + "/.mirp";
 bool checkConfigExistance() {
     // Again, re-write this with global vars!
     if(QDir(configDir).exists() &&
-       QFile::exists(configDir + "/nodes.json") &&
-       QFile::exists(configDir + "/config.json"))
+            QFile::exists(configDir + "/nodes.json") &&
+            QFile::exists(configDir + "/config.json"))
         return true;
     return false;
 }
@@ -40,38 +41,9 @@ void createBlankConfig() {
     process.waitForFinished(-1);
 }
 
-/*
- * Creates Node model to be used in Setup view, loads data
- * from node.json
- */
-QVariantList createNodeModel(void) {
-    QVariantList dataList;
-
-    QFile loadFile(":/data/nodes.json");
-
-    if (!loadFile.open(QIODevice::ReadOnly)) {
-        qWarning("Couldn't open node data file.");
-        return dataList;
-    }
-
-    QByteArray nodeData = loadFile.readAll();
-    QJsonDocument loadDoc(QJsonDocument::fromJson(nodeData));
-
-    const QJsonObject &objDoc = loadDoc.object();
-
-    QJsonDocument doc(objDoc);
-    QString strJson(doc.toJson(QJsonDocument::Compact));
-
-    QJsonArray nodesArray = objDoc["nodes"].toArray();
-
-    for(int i = 0; i < nodesArray.count(); i++) {
-        dataList.append(nodesArray[i].toVariant());
-    }
-
-    return dataList;
-}
-
 int main(int argc, char *argv[]) {
+    nodeControls controls;
+
     if(!checkConfigExistance())
         createBlankConfig();
 
@@ -87,11 +59,13 @@ int main(int argc, char *argv[]) {
 
     engine.addImportPath(QStringLiteral("qrc:/"));
 
+    qmlRegisterType<nodeControls>("NodeControls", 1, 0, "NodeControls");
+
     engine.addImageProvider(QLatin1String("fluidicons"), new IconsImageProvider());
     engine.addImageProvider(QLatin1String("fluidicontheme"), new IconThemeImageProvider());
 
     QQmlContext *ctxt = engine.rootContext();
-    ctxt->setContextProperty("nodeModel", createNodeModel());
+    ctxt->setContextProperty("nodeModel", controls.createNodeModel());
 
     engine.load(QUrl(QStringLiteral("qrc:/Main.qml")));
 

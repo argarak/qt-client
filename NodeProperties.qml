@@ -20,10 +20,17 @@ import QtQuick.Controls 2.1
 import QtQuick.Controls.Material 2.0
 import Fluid.Controls 1.0
 import Fluid.Material 1.0
+
 import "common.js" as Common
 import "jsonData.js" as Data
 
+import NodeControls 1.0
+
 Page {
+    NodeControls {
+        id: controls
+    }
+
     Material.background: Common.windowColor
 
     function getValueText(field, subField) {
@@ -42,6 +49,7 @@ Page {
             id: nodePropertyList
             anchors.fill: parent
             model: ListModel {
+                ListElement { title: "Label"; field: "label"; subField: "" }
                 ListElement { title: "Last Online"; field: "lastOnline"; subField: "" }
                 ListElement { title: "Firmware Version"; field: "firmware"; subField: "version" }
                 ListElement { title: "Firmware Type"; field: "firmware"; subField: "type" }
@@ -84,6 +92,8 @@ Page {
 
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Remove Node")
+
+            onClicked: controls.remove(nodeModel[Data.currentIndex].label)
         }
     }
 
