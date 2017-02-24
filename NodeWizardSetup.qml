@@ -29,6 +29,9 @@ import NodeControls 1.0
 Page {
     id: wizardPage
 
+    property string globalLabel: ""
+    property string globalType: ""
+
     NodeControls {
         id: controls
     }
@@ -42,7 +45,10 @@ Page {
             text: qsTr("Proceed")
             tooltip: qsTr("Finish")
             iconName: "action/done"
-            onTriggered: pageStack.push(doneItem);
+            onTriggered: {
+                controls.addEmpty(globalLabel, globalType);
+                pageStack.push(doneItem);
+            }
         }
     ]
 
@@ -62,29 +68,47 @@ Page {
                 text: model.title
 
                 Loader {
+                    id: loader
                     anchors.right: parent.right
                     anchors.rightMargin: 20
                     sourceComponent: {
                         switch(model.type) {
-                        case "combo": return comboDelegate
-                        case "field": return fieldDelegate
+                            case "combo":
+                                return comboDelegate
+                            case "field":
+                                return fieldDelegate
                         }
                     }
                 }
 
                 Component {
                     id: comboDelegate
+
                     ComboBox {
+                        id: nodeType
                         width: 200
-                        model: [ "AVR" ]
+                        model: ListModel {
+                            id: model
+                            ListElement { type: "AVR" }
+                        }
+                        onCurrentIndexChanged: {
+                            console.log(model.get(currentIndex).type);
+                            globalType = model.get(currentIndex).type;
+                        }
                     }
 
                 }
 
                 Component {
                     id: fieldDelegate
+
                     TextField {
+                        id: nodeLabel
                         width: 200
+                        onEditingFinished: {
+                            console.log(nodeLabel.getText(0, nodeLabel.length));
+                            globalLabel = nodeLabel.getText(0, nodeLabel.length);
+                        }
                     }
                 }
             }
@@ -104,6 +128,7 @@ Page {
                     iconName: "hardware/keyboard_return"
                     tooltip: "Go back to Node list"
                     text: "Back"
+                    onTriggered: pageStack.push(Qt.resolvedUrl("Setup.qml"));
                 }
 
             ]
