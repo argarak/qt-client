@@ -42,8 +42,6 @@ Page {
         id: controls
     }
 
-    Component.onCompleted: Data.count = 0;
-
     property variant nodeModel: controls.createNodeModel()
     property bool canGoBack: false
 

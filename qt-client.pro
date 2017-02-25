@@ -1,7 +1,7 @@
 TEMPLATE = app
 
 QT += qml quick quickcontrols2 widgets
-CONFIG += c++11
+CONFIG += c++11 debug
 
 SOURCES += main.cpp \
     nodecontrols.cpp

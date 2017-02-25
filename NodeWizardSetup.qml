@@ -47,6 +47,7 @@ Page {
             iconName: "action/done"
             onTriggered: {
                 controls.addEmpty(globalLabel, globalType);
+                Data.count = 0;
                 pageStack.push(doneItem);
             }
         }

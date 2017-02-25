@@ -88,7 +88,7 @@ public:
     Q_INVOKABLE bool addEmpty(QString label, QString type) {
         QFile saveFile(configDir + "/nodes.json");
         
-        if (!saveFile.open(QIODevice::WriteOnly)) {
+        if (!saveFile.open(QIODevice::ReadWrite)) {
             qWarning("Couldn't open save file.");
             return false;
         }
@@ -96,12 +96,18 @@ public:
         QJsonDocument loadDoc(QJsonDocument::fromJson(saveFile.readAll()));
         const QJsonObject &objDoc = loadDoc.object();
 
+        saveFile.close();
+
+        if (!saveFile.open(QIODevice::WriteOnly)) {
+            qWarning("Couldn't open save file.");
+            return false;
+        }
+
         QJsonArray nodeArray = objDoc["nodes"].toArray();
 
         nodeArray.append(createBlankNodeObject(label, type));
 
         QJsonObject nodeObject;
-
         nodeObject["nodes"] = nodeArray;
 
         QJsonDocument saveDoc(nodeObject);

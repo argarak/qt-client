@@ -60,9 +60,6 @@ int main(int argc, char *argv[]) {
     engine.addImageProvider(QLatin1String("fluidicons"), new IconsImageProvider());
     engine.addImageProvider(QLatin1String("fluidicontheme"), new IconThemeImageProvider());
 
-    //QQmlContext *ctxt = engine.rootContext();
-    //ctxt->setContextProperty("nodeModel", controls.createNodeModel());
-
     engine.load(QUrl(QStringLiteral("qrc:/Main.qml")));
 
     return app.exec();
