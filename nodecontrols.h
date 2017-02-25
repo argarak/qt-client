@@ -22,7 +22,7 @@ public:
      * Creates Node model to be used in Setup view, loads data
      * from node.json
      */
-    QVariantList createNodeModel(void) {
+    Q_INVOKABLE QVariantList createNodeModel(void) {
         QVariantList dataList;
         
         QFile loadFile(configDir + "/nodes.json");

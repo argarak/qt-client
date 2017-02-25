@@ -20,6 +20,7 @@ var currentIndex = 0;
 
 function assignValue(nodeModel) {
     count++;
+    console.log(JSON.stringify(nodeModel[0]));
     return nodeModel[count - 1].label;
 }
 

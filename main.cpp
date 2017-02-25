@@ -17,14 +17,12 @@
 
 #include "nodecontrols.h"
 
-// TODO Add this variable to common vars
 nodeControls controls;
 
 /*
  * Checks if the config directory (and its files) exist
  */
 bool checkConfigExistance() {
-    // Again, re-write this with global vars!
     if(QDir(controls.configDir).exists() &&
             QFile::exists(controls.configDir + "/nodes.json") &&
             QFile::exists(controls.configDir + "/config.json"))
@@ -62,8 +60,8 @@ int main(int argc, char *argv[]) {
     engine.addImageProvider(QLatin1String("fluidicons"), new IconsImageProvider());
     engine.addImageProvider(QLatin1String("fluidicontheme"), new IconThemeImageProvider());
 
-    QQmlContext *ctxt = engine.rootContext();
-    ctxt->setContextProperty("nodeModel", controls.createNodeModel());
+    //QQmlContext *ctxt = engine.rootContext();
+    //ctxt->setContextProperty("nodeModel", controls.createNodeModel());
 
     engine.load(QUrl(QStringLiteral("qrc:/Main.qml")));
 

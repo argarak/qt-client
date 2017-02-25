@@ -24,9 +24,12 @@ import Fluid.Controls 1.0
 import Fluid.Material 1.0
 import Fluid.Core 1.0
 import Material.ListItems 0.1 as ListItem
+
 import "toSetup.js" as Setup
 import "common.js" as Common
 import "jsonData.js" as Data
+
+import NodeControls 1.0
 
 Page {
     id: setupPage
@@ -35,6 +38,13 @@ Page {
     width: Common.windowWidth
     height: Common.windowHeight
 
+    NodeControls {
+        id: controls
+    }
+
+    Component.onCompleted: Data.count = 0;
+
+    property variant nodeModel: controls.createNodeModel()
     property bool canGoBack: false
 
     title: "Node Setup"
