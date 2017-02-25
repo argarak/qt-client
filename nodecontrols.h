@@ -49,8 +49,41 @@ public:
         return dataList;
     }
 
-    Q_INVOKABLE void remove(QString label) {
+    Q_INVOKABLE bool remove(QString label) {
         qDebug() << "Removing " << label << "!";
+        QFile saveFile(configDir + "/nodes.json");
+
+        if (!saveFile.open(QIODevice::ReadWrite)) {
+            qWarning("Couldn't open save file.");
+            return false;
+        }
+
+        QJsonDocument loadDoc(QJsonDocument::fromJson(saveFile.readAll()));
+        const QJsonObject &objDoc = loadDoc.object();
+
+        saveFile.close();
+
+        if (!saveFile.open(QIODevice::WriteOnly)) {
+            qWarning("Couldn't open save file.");
+            return false;
+        }
+
+        QJsonArray nodeArray = objDoc["nodes"].toArray();
+
+        for(int i = 0; i < nodeArray.count(); i++) {
+            if(nodeArray[i].toObject()["label"] == label) {
+                nodeArray.removeAt(i);
+                break;
+            }
+        }
+
+        QJsonObject nodeObject;
+        nodeObject["nodes"] = nodeArray;
+
+        QJsonDocument saveDoc(nodeObject);
+        saveFile.write(saveDoc.toJson());
+
+        return true;
     }
     
     // TODO write firmware version grabber from Github API

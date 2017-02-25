@@ -18,6 +18,7 @@ import QtQuick.Window 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1
 import QtQuick.Controls.Material 2.0
+import QtQuick.Dialogs 1.2
 import Fluid.Controls 1.0
 import Fluid.Material 1.0
 
@@ -27,6 +28,8 @@ import "jsonData.js" as Data
 import NodeControls 1.0
 
 Page {
+    id: propertiesPage
+
     NodeControls {
         id: controls
     }
@@ -38,6 +41,23 @@ Page {
             return nodeModel[Data.currentIndex][field]
         }
         return nodeModel[Data.currentIndex][field][subField]
+    }
+
+    AlertDialog {
+        id: alert
+
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
+
+        text: qsTr("Are you sure you want to remove node " + nodeModel[Data.currentIndex].label + "?")
+        standardButtons: Dialog.Yes | Dialog.No
+
+        onAccepted: {
+            propertiesPage.forcePop();
+            controls.remove(nodeModel[Data.currentIndex].label);
+            nodeModel = controls.createNodeModel();
+            Data.count = 0;
+        }
     }
 
     Rectangle {
@@ -93,7 +113,7 @@ Page {
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Remove Node")
 
-            onClicked: controls.remove(nodeModel[Data.currentIndex].label)
+            onClicked: alert.open();
         }
     }
 
