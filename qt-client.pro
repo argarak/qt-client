@@ -4,7 +4,8 @@ QT += qml quick quickcontrols2 widgets
 CONFIG += c++11 debug
 
 SOURCES += main.cpp \
-    nodecontrols.cpp
+    nodecontrols.cpp \
+    serial.cpp
 
 RESOURCES += qml.qrc \
     icons/icons.qrc \
@@ -44,4 +45,5 @@ DISTFILES += \
     data/nodes.json
 
 HEADERS += \
-    nodecontrols.h
+    nodecontrols.h \
+    serial.h

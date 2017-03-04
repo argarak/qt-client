@@ -16,6 +16,7 @@
 #include "iconthemeimageprovider.h"
 
 #include "nodecontrols.h"
+#include "serial.h"
 
 nodeControls controls;
 
@@ -42,6 +43,9 @@ void createBlankConfig() {
 int main(int argc, char *argv[]) {
     if(!checkConfigExistance())
         createBlankConfig();
+
+    Serial serial;
+    serial.serialInit();
 
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication app(argc, argv);
