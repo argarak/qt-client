@@ -60,6 +60,7 @@ int main(int argc, char *argv[]) {
     engine.addImportPath(QStringLiteral("qrc:/"));
 
     qmlRegisterType<nodeControls>("NodeControls", 1, 0, "NodeControls");
+    qmlRegisterType<Serial>("SerialControls", 1, 0, "SerialControls");
 
     engine.addImageProvider(QLatin1String("fluidicons"), new IconsImageProvider());
     engine.addImageProvider(QLatin1String("fluidicontheme"), new IconThemeImageProvider());

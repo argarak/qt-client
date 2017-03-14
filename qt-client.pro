@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick quickcontrols2 widgets
+QT += qml quick quickcontrols2 widgets serialport
 CONFIG += c++11 debug
 
 SOURCES += main.cpp \

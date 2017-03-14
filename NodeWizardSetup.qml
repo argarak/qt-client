@@ -25,15 +25,21 @@ import "common.js" as Common
 import "jsonData.js" as Data
 
 import NodeControls 1.0
+import SerialControls 1.0
 
 Page {
     id: wizardPage
 
     property string globalLabel: ""
     property string globalType: ""
+    property string globalPort: ""
 
     NodeControls {
         id: controls
+    }
+
+    SerialControls {
+        id: serial
     }
 
     title: qsTr("Create a new Node")
@@ -61,6 +67,7 @@ Page {
             model: ListModel {
                 ListElement { title: "Label"; type: "field" }
                 ListElement { title: "Board"; type: "combo" }
+                ListElement { title: "Port";  type: "comboPort" }
             }
             header: Subheader {
                 text: "Details"
@@ -78,6 +85,8 @@ Page {
                                 return comboDelegate
                             case "field":
                                 return fieldDelegate
+                            case "comboPort":
+                                return portDelegate
                         }
                     }
                 }
@@ -109,6 +118,24 @@ Page {
                         onEditingFinished: {
                             console.log(nodeLabel.getText(0, nodeLabel.length));
                             globalLabel = nodeLabel.getText(0, nodeLabel.length);
+                        }
+                    }
+                }
+
+                Component {
+                    id: portDelegate
+
+                    ComboBox {
+                        id: portType
+                        width: 200
+                        model: serial.getConnectedDevices()
+
+                        textRole: "port"
+
+                        onCurrentIndexChanged: {
+                            console.log(serial.getConnectedDevices());
+                            console.log(JSON.stringify(model));
+                            globalPort = model[0]["port"].toString();
                         }
                     }
                 }

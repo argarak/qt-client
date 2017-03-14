@@ -1,8 +1,6 @@
 #include "serial.h"
 
-Serial::Serial(QObject *parent) : QObject(parent) {
-
-}
+Serial::Serial(QObject *parent) : QObject(parent) {}
 
 #define CRC16 0x8005
 
@@ -34,6 +32,36 @@ QString Serial::hashID(const char* data) {
     return QString(QByteArray::number(out, 16));
 }
 
+QVariantList Serial::getConnectedDevices() {
+    const auto allSerial = QSerialPortInfo::availablePorts();
+    QVariantList list;
+
+    for(const QSerialPortInfo &serialInfo : allSerial) {
+        QJsonObject currentSerial;
+
+        // Ignore if no serial number
+        if(!serialInfo.serialNumber().isEmpty()) {
+            currentSerial["port"] = serialInfo.portName();
+
+            if(serialInfo.hasProductIdentifier())
+                currentSerial["id"] = serialInfo.productIdentifier();
+            else
+                currentSerial["id"] = -1;
+
+            currentSerial["number"] = serialInfo.serialNumber();
+            currentSerial["busy"] = serialInfo.isBusy();
+            currentSerial["deviceName"] = serialInfo.description();
+            
+            //list.append(currentSerial);
+            list.append(currentSerial.toVariantMap());
+        }
+    }
+
+    qDebug() << list;
+    return list;
+}
+
 void Serial::serialInit() {
-    qDebug() << hashID("95437313335351409201");
+    qDebug() << Serial::getConnectedDevices();
+    //Serial::serialDevices = Serial::getConnectedDevices();
 }
