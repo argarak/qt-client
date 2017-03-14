@@ -52,16 +52,13 @@ QVariantList Serial::getConnectedDevices() {
             currentSerial["busy"] = serialInfo.isBusy();
             currentSerial["deviceName"] = serialInfo.description();
             
-            //list.append(currentSerial);
             list.append(currentSerial.toVariantMap());
         }
     }
 
-    qDebug() << list;
     return list;
 }
 
 void Serial::serialInit() {
     qDebug() << Serial::getConnectedDevices();
-    //Serial::serialDevices = Serial::getConnectedDevices();
 }
