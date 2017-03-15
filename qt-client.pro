@@ -5,7 +5,8 @@ CONFIG += c++11 debug
 
 SOURCES += main.cpp \
     nodecontrols.cpp \
-    serial.cpp
+    serial.cpp \
+    command_interface.cpp
 
 RESOURCES += qml.qrc \
     icons/icons.qrc \
@@ -46,4 +47,5 @@ DISTFILES += \
 
 HEADERS += \
     nodecontrols.h \
-    serial.h
+    serial.h \
+    command_interface.h

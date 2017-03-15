@@ -17,8 +17,10 @@
 
 #include "nodecontrols.h"
 #include "serial.h"
+#include "command_interface.h"
 
 nodeControls controls;
+CommandInterface command;
 
 /*
  * Checks if the config directory (and its files) exist
@@ -35,9 +37,8 @@ bool checkConfigExistance() {
  * Creates blank configuration setup via mirp_cli
  */
 void createBlankConfig() {
-    QProcess process;
-    process.start("python ../qt-client/mirp-cli/mirp_cli config create");
-    process.waitForFinished(-1);
+    QString params[] = {"create"};
+    command.sendCommand((QString)"config", params);
 }
 
 int main(int argc, char *argv[]) {

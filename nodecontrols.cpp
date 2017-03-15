@@ -96,6 +96,8 @@ QJsonObject nodeControls::createBlankNodeObject(QString label, QString type) {
     QJsonArray modules;
     nodeObject["modules"] = modules;
 
+    QDir().mkdir(configDir + "/" + label);
+
     return nodeObject;
 }
 
