@@ -1,4 +1,6 @@
+<p align="center">
 <img alt="qt-client logo" src="https://mirpm.github.io/icons/qt-client.svg" width="200px"/>
+</p>
 
 # qt-client
 
